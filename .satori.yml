@@ -31,3 +31,4 @@ settings:
   valgrind: False
   threads: 100
   timeout: 10
+ 
